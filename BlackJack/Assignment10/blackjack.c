@@ -1,7 +1,10 @@
-#include<stdio.h>
-#include <stdlib.h>
+#include <fcntl.h>
+#include <io.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 
 /*
 
@@ -79,74 +82,31 @@ void DisplayCard(int card)
 	// operation to get card type and card number from 0 to 51
 	int cardNumber = card % 13 + 1;
 	int cardType = card / 13 + 1;
-
-	char* cardNumberToString = "";
-	char* cardTypeToString = "";
-
-	switch (cardNumber)
-	{
-	case 1:
-		cardNumberToString = "Ace";
-		break;
-	case 2:
-		cardNumberToString = "Two";
-		break;
-	case 3:
-		cardNumberToString = "Three";
-		break;
-	case 4:
-		cardNumberToString = "Four";
-		break;
-	case 5:
-		cardNumberToString = "Five";
-		break;
-	case 6:
-		cardNumberToString = "Six";
-		break;
-	case 7:
-		cardNumberToString = "Seven";
-		break;
-	case 8:
-		cardNumberToString = "Eight";
-		break;
-	case 9:
-		cardNumberToString = "Nine";
-		break;
-	case 10:
-		cardNumberToString = "Ten";
-		break;
-	case 11:
-		cardNumberToString = "Jack";
-		break;
-	case 12:
-		cardNumberToString = "Queen";
-		break;
-	case 13:
-		cardNumberToString = "King";
-		break;
-	default:
-		break;
-	}
+	wchar_t* cardTypeUnicode = L"";
 
 	switch (cardType)
 	{
 	case 1:
-		cardTypeToString = "Hearts";
+		cardTypeUnicode = L"\x2665";
 		break;
 	case 2:
-		cardTypeToString = "Diamonds";
+		cardTypeUnicode = L"\x2666";
 		break;
 	case 3:
-		cardTypeToString = "Spades";
+		cardTypeUnicode = L"\x2660";
 		break;
 	case 4:
-		cardTypeToString = "Clubs";
+		cardTypeUnicode = L"\x2663";
 		break;
 	default:
 		break;
 	}
 
-	printf("%s of %s\n", cardNumberToString, cardTypeToString);
+	_setmode(_fileno(stdout), _O_U16TEXT);
+	wprintf(L"%d%ls \n", cardNumber, cardTypeUnicode);
+	_setmode(_fileno(stdout), _O_TEXT);
+
+	//printf("%s of %s\n", cardNumberToString, cardTypeToString);
 };
 
 // Displays the cards in array which are player cards here
