@@ -1,7 +1,4 @@
-# ConsoleGames
-Bunch of Small Console Games I developed as a hobby
-
-#Black Jack
+# ConsoleGame #1 : Black Jack
 
 1. Hit
 2. Double Down
