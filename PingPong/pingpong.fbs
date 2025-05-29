@@ -1,0 +1,8 @@
+// Example IDL file for our GameState's schema.
+ 
+table GameState {
+  bluescore:int;
+  redscore:int;
+}
+ 
+root_type GameState;
